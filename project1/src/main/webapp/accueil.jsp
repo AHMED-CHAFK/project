@@ -1,4 +1,6 @@
 <%@page import="services.servicesLivre"%>
+<%@page import="java.sql.*"%>
+
 <%@page import="models.Livre"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -43,10 +45,17 @@
 </script>
 </head>
 <% 
-ArrayList<Livre>List=servicesLivre.getallLivre(); 
+ArrayList<Livre>List=servicesLivre.getallLivre();
+		//if(request.getParameter("id")!=null){
+			//response.sendRedirect("http://localhost:8081/project1/ahmed");
+			//request.setAttribute("idn", request.getParameter("id"));
+			//request.getRequestDispatcher("/ahmed").forward(request,response);
+		//}
 %>
 <body>
-
+<% if(request.getParameter("id")!=null){
+servicesLivre.SupprimerLivre(Integer.parseInt(request.getParameter("id")));}
+%>
               
               <!-- /.card-header -->
               <div class="card-body">
@@ -69,6 +78,8 @@ ArrayList<Livre>List=servicesLivre.getallLivre();
 <td><%=L.getTitre()%></td>
 <td><%=L.getNomauteur()%></td>
 <td><%=L.getCategorie()%></td>
+<td><%=L.getCategorie()%></td>
+<td><a href="?id=<%=L.getIdl() %>">delete</a></td>
 </tr>
 <%} %>
  </tbody>

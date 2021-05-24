@@ -64,4 +64,37 @@ public class daoLivre {
 		}
 		return Livers;
 	}
-}
+	public static List<Livre> listeparcategorie(String categorie){
+		List<Livre> Livers=new ArrayList<Livre>();
+		try {
+			connexion.connect();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet res = null;
+		try {
+			res = connexion.select("select * from livre where categorie='"+categorie+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			while (res.next()) {
+				Livre L =new Livre(res.getInt(1),res.getString(2),res.getString(3),res.getString(4));
+				Livers.add(L);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			connexion.disconnect();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Livers;
+	}}
+

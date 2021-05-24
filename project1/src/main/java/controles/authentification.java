@@ -48,6 +48,7 @@ public class authentification extends HttpServlet {
 			response.sendRedirect("http://localhost:8080/project1/auth.jsp");
 		}
 		else
+			
 		{HttpSession session=request.getSession();
 		session.setAttribute("per", p);
 			response.sendRedirect("http://localhost:8081/project1/accueil");
